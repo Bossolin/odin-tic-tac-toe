@@ -1,6 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;700;800;900&family=Teko:wght@300;400;500;600;700&display=swap");
+
 body {
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
   height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.gameboard {
+  margin: 0 auto;
+  height: 400px;
+  width: 400px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.gameboard div {
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px black solid;
+  font-size: 5rem;
+  line-height: 2rem;
+}
+
+.input {
+  margin: 1rem;
 }
