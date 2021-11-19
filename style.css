@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;700;800;900&family=Teko:wght@300;400;500;600;700&display=swap");
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Montserrat", sans-serif;
   text-align: center;
@@ -15,15 +21,18 @@ body {
   width: 400px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  background-color: black;
+  cursor: pointer;
 }
 
 .gameboard div {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px black solid;
-  font-size: 5rem;
-  line-height: 2rem;
+  font-size: 6rem;
+  line-height: 0rem;
+  background-color: white;
 }
 
 .input {
