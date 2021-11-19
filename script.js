@@ -7,7 +7,6 @@ const gameBoard = (() => {
     gameBoard.appendChild(cell);
   }
   //store values on the board
-  const gameBoardArr = [];
   //store win condish
   //
   return {};
@@ -16,22 +15,26 @@ const gameBoard = (() => {
 const displayController = (() => {
   //place markers
   const cells = document.querySelectorAll(".gameboard div");
+  const gameBoardArr = [];
   let turn = true;
 
   const placeMarker = (e) => {
     const cell = e.target;
     cell.innerText = turn ? "X" : "O";
+    //store value
+    gameBoardArr[cell.id] = turn ? "X" : "O";
     //change player
     turn = !turn;
   };
 
   cells.forEach((cell) => {
     cell.addEventListener("click", placeMarker, { once: true });
+    gameBoardArr.push("");
   });
 
   //check for win condish
 
-  return {};
+  return { gameBoardArr };
 })();
 
 const player = () => {
