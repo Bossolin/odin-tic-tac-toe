@@ -1,47 +1,80 @@
 const gameBoard = (() => {
-  //render the board
-  const gameBoard = document.querySelector(".gameboard");
+  const gameBoardDiv = document.querySelector(".gameboard");
+  let gameBoardArr = ["", "", "", "", "", "", "", "", ""];
+  let turn = true;
+
+  const winCondish = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
   for (let i = 0; i < 9; i++) {
     const cell = document.createElement("div");
     cell.setAttribute("id", `${i}`);
-    gameBoard.appendChild(cell);
+    gameBoardDiv.appendChild(cell);
   }
-  //store values on the board
-  //store win condish
-  //
-  return {};
+
+  return { gameBoardArr, turn, winCondish };
 })();
 
-const displayController = (() => {
-  //place markers
+const gameControl = (() => {
   const cells = document.querySelectorAll(".gameboard div");
-  const gameBoardArr = [];
-  let turn = true;
+  const resetBtn = document.querySelector(".controls");
+  const announcer = document.querySelector(".announcer h2");
 
   const placeMarker = (e) => {
     const cell = e.target;
-    cell.innerText = turn ? "X" : "O";
-    //store value
-    gameBoardArr[cell.id] = turn ? "X" : "O";
-    //change player
-    turn = !turn;
+    cell.innerText = gameBoard.turn ? "X" : "O";
+    gameBoard.gameBoardArr[cell.id] = gameBoard.turn ? "X" : "O";
+    gameBoard.gameBoardArr.every((cell) => cell)
+      ? (announcer.innerText = "It's a tie!")
+      : "";
+    gameBoard.turn = !gameBoard.turn;
+    checkWinCondish();
+  };
+
+  const checkWinCondish = () => {
+    gameBoard.winCondish.forEach((condish) => {
+      let a = gameBoard.gameBoardArr[condish[0]];
+      let b = gameBoard.gameBoardArr[condish[1]];
+      let c = gameBoard.gameBoardArr[condish[2]];
+      if (a === "" || b === "" || c === "") {
+        return;
+      }
+      if (a === b && b === c) {
+        announcer.innerText = `${!gameBoard.turn ? "X" : "O"} won the round!`;
+      }
+    });
   };
 
   cells.forEach((cell) => {
     cell.addEventListener("click", placeMarker, { once: true });
-    gameBoardArr.push("");
   });
 
-  //check for win condish
-
-  return { gameBoardArr };
-})();
-
-const player = () => {
-  //ask for and store name
-  const name = prompt("Your name?");
-  //assign mark
-  const mark = "X";
+  resetBtn.addEventListener("click", () => {
+    gameBoard.gameBoardArr = ["", "", "", "", "", "", "", "", ""];
+    announcer.innerText = "X starts the game!";
+    cells.forEach((cell) => {
+      cell.innerText = "";
+      cell.addEventListener("click", placeMarker, { once: true });
+    });
+    gameBoard.turn = true;
+  });
 
   return {};
+})();
+
+const player = (name, mark) => {
+  name;
+  mark;
+  return { name, mark };
 };
+
+const player1 = player("Vlad", "X");
+const player2 = player("Pauke", "O");
