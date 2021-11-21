@@ -28,9 +28,10 @@ const gameControl = (() => {
   const resetBtn = document.querySelector(".controls");
   const announcer = document.querySelector(".announcer h2");
 
-  const placeMarker = (e) => {
+  const clickHandler = (e) => {
     const cell = e.target;
     cell.innerText = gameBoard.turn ? "X" : "O";
+    announcer.innerText = `${!gameBoard.turn ? "X" : "O"} it's your turn.`;
     gameBoard.gameBoardArr[cell.id] = gameBoard.turn ? "X" : "O";
     gameBoard.gameBoardArr.every((cell) => cell)
       ? (announcer.innerText = "It's a tie!")
@@ -48,19 +49,19 @@ const gameControl = (() => {
         return;
       }
       if (a === b && b === c) {
-        announcer.innerText = `${!gameBoard.turn ? "X" : "O"} won the round!`;
+        announcer.innerText = `${!gameBoard.turn ? "X" : "O"} wins the game!`;
         cells[condish[0]].style.color = "red";
         cells[condish[1]].style.color = "red";
         cells[condish[2]].style.color = "red";
         cells.forEach((cell) => {
-          cell.removeEventListener("click", placeMarker);
+          cell.removeEventListener("click", clickHandler);
         });
       }
     });
   };
 
   cells.forEach((cell) => {
-    cell.addEventListener("click", placeMarker, { once: true });
+    cell.addEventListener("click", clickHandler, { once: true });
   });
 
   resetBtn.addEventListener("click", () => {
@@ -69,7 +70,7 @@ const gameControl = (() => {
     cells.forEach((cell) => {
       cell.innerText = "";
       cell.style.color = "black";
-      cell.addEventListener("click", placeMarker, { once: true });
+      cell.addEventListener("click", clickHandler, { once: true });
     });
     gameBoard.turn = true;
   });

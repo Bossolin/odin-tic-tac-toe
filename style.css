@@ -16,12 +16,12 @@ body {
 }
 
 .gameboard {
-  margin: 0 auto;
+  margin: 4rem auto;
   height: 400px;
   width: 400px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
+  gap: 5px;
   background-color: black;
   cursor: pointer;
 }
@@ -36,5 +36,20 @@ body {
 }
 
 .input {
-  margin: 1rem;
+  margin: 2rem auto;
+}
+
+.controls {
+  background-color: rgba(31, 121, 255, 0.849);
+  padding: 1rem 3rem;
+  color: white;
+  font-size: 2rem;
+  border: none;
+  border-radius: 8px;
+}
+
+.controls:hover {
+  background-color: white;
+  color: #1f79ffd8;
+  border: 2px solid #1f79ffd8;
 }
