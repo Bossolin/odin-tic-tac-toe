@@ -49,6 +49,12 @@ const gameControl = (() => {
       }
       if (a === b && b === c) {
         announcer.innerText = `${!gameBoard.turn ? "X" : "O"} won the round!`;
+        cells[condish[0]].style.color = "red";
+        cells[condish[1]].style.color = "red";
+        cells[condish[2]].style.color = "red";
+        cells.forEach((cell) => {
+          cell.removeEventListener("click", placeMarker);
+        });
       }
     });
   };
@@ -62,6 +68,7 @@ const gameControl = (() => {
     announcer.innerText = "X starts the game!";
     cells.forEach((cell) => {
       cell.innerText = "";
+      cell.style.color = "black";
       cell.addEventListener("click", placeMarker, { once: true });
     });
     gameBoard.turn = true;
@@ -69,12 +76,3 @@ const gameControl = (() => {
 
   return {};
 })();
-
-const player = (name, mark) => {
-  name;
-  mark;
-  return { name, mark };
-};
-
-const player1 = player("Vlad", "X");
-const player2 = player("Pauke", "O");
